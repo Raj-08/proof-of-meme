@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="meme-truth-machine/logo.png" alt="Meme Truth Machine logo" width="200" />
+</p>
+
 ## Meme Truth Machine
 
 On-chain meme canonization. This project lets you register a meme’s hashed content and associated metadata on Solana, producing a verifiable, immutable record of “truth” for a meme. It includes:
