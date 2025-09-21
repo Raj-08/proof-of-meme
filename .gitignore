@@ -1,0 +1,31 @@
+# Node / Frontend
+node_modules/
+.DS_Store
+dist/
+dist-ssr/
+.vite/
+
+# Env
+.env
+.env.*
+server/.env
+
+# Logs
+logs/
+*.log
+
+# Solana / Anchor
+**/target/
+**/test-ledger/
+**/*.so
+**/*-keypair.json
+**/validator.log
+**/validator-*.log
+**/validator-*.bin
+
+# Misc IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
