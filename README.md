@@ -2,6 +2,42 @@
   <img src="meme-truth-machine/public/logo.png" alt="Meme Truth Machine logo" width="200" />
 </p>
 
+
+### 1 Meme = 1 Coin
+
+A meme is more than a picture—it’s a unique fingerprint of pixels and meaning. We bind each meme’s semantic identity to a single on-chain account so the same meme maps to the same coin.
+
+### What makes a meme a meme?
+
+- **Pixels**: An image is just hundreds of thousands of pixels (numbers). To a computer, copies of the same meme look identical: the same numbers.
+- **Problem**: Multiple copies produce confusion—what’s the “real” one?
+- **Our fix**: We turn a meme into a stable, content-addressed identity using AI vector embeddings and cryptographic hashing.
+
+### How it works (end-to-end)
+
+1. **Submit**: Frontend sends image vector + meme text to the server (`POST /api/process-meme`).
+2. **Vector embeddings**:
+   - Image: client provides `imageVector`.
+   - Text: server requests an embedding from OpenAI.
+3. **Normalize + combine**: We L2-normalize both vectors and concatenate them to form a unified semantic vector.
+4. **Hashing**:
+   - `image_hash` = SHA-256(imageVector)
+   - `text_hash` = SHA-256(textEmbedding)
+   - `meme_hash` = SHA-256(combinedVector) ← the meme’s semantic fingerprint
+5. **Deterministic PDA** (Solana): The meme account address is derived exactly as the program expects:
+   - Seeds: `[b"meme", meme_hash]` (32 bytes)
+   - PDA: `Pubkey::find_program_address([b"meme", meme_hash], program_id)`
+   - Result: The same meme always maps to the same on-chain account.
+6. **On-chain register**: We call the Anchor instruction `register_meme` with:
+   - `meme_hash`, `image_hash`, `text_hash` (all `[u8; 32]`)
+   - `verdict` (string), `canon_score` (u32), `pumpfun_ca` (string), `metadata_uri` (string)
+7. **Verify later**: Anyone can recompute the hashes from the content and derive the same PDA to confirm originality/identity.
+
+### Why this ensures “1 Meme = 1 Coin”
+
+- **Same content → same vector → same hash → same PDA**. Duplicates collapse to the same on-chain account.
+- **Immutable address**: The account address is derived from content, not from who submits it.
+
 ## Meme Truth Machine
 
 On-chain meme canonization. This project lets you register a meme’s hashed content and associated metadata on Solana, producing a verifiable, immutable record of “truth” for a meme. It includes:
