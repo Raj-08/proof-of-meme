@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="meme-truth-machine/logo.png" alt="Meme Truth Machine logo" width="200" />
+  <img src="meme-truth-machine/public/logo.png" alt="Meme Truth Machine logo" width="200" />
 </p>
 
 ## Meme Truth Machine

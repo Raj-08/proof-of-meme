@@ -2,7 +2,7 @@
 # Welcome to your Lovable project
 
 <p align="center">
-  <img src="./logo.png" alt="Meme Truth Machine logo" width="200" />
+  <img src="./public/logo.png" alt="Meme Truth Machine logo" width="200" />
 </p>
 
 ## Project info
